@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javaapplication9;
+package hockey;
 
+import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -19,8 +20,13 @@ import javax.swing.WindowConstants;
  *
  * @author deinfo
  */
-public class JavaApplication9 extends JComponent{
+public class Hockey extends JComponent{
 
+    public AlphaComposite makeComposite(float alpha) {
+    int type = AlphaComposite.SRC_OVER;
+    return(AlphaComposite.getInstance(type, alpha));
+ }
+    
     @Override
     public void paint(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
@@ -33,17 +39,22 @@ public class JavaApplication9 extends JComponent{
         
         // zona neutra
             // linha central
+        g2.setPaint(Color.RED);
         g2.drawLine(200, 50, 200, 115); 
         g2.drawOval(199, 124, 3, 3);
         g2.drawLine(200, 135, 200, 200);
             // circulo central
+        //g2.setPaint(new Color(0, 1, 0, alpha));
+        g2.setPaint(Color.BLUE);
         g2.drawOval(175, 100, 50, 50);
             // linha central esquerda
+        g2.setPaint(Color.BLUE);
         g2.drawLine(152, 50, 152, 200);
             // linha central direita
         g2.drawLine(248, 50, 248, 200);
         
         //linha gol esquerda
+        g2.setPaint(Color.RED);
         g2.drawLine(65, 54, 65, 196);
         
         //linha gol direita
@@ -54,10 +65,9 @@ public class JavaApplication9 extends JComponent{
     public static void main(String[] args) {
         JFrame frame = new JFrame("Rounded Rectangle Demo");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new JavaApplication9(), BorderLayout.CENTER);
+        frame.getContentPane().add(new Hockey(), BorderLayout.CENTER);
         frame.pack();
         frame.setSize(420, 300);
         frame.setVisible(true);
     }
 }
-    
